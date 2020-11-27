@@ -1,0 +1,38 @@
+name: Setting up Go environment
+on:
+  push:
+jobs:
+  setting-up-test:
+    runs-on: ubuntu-18.04
+    name: Go ${{ matrix.go }} example
+    steps:
+      - name: Creating checkout
+        uses: actions/checkout@v2
+      - name: Setup go
+        uses: actions/setup-go@v2
+        with:
+            go-version: ${{ matrix.go }}
+      - name: checking go version
+        run: go version
+      - name: Install dependencies
+        id: InstallDep
+        run: |
+          go get github.com/tebeka/go2xunit
+      - if: ${{success()}}
+        name: Go get goblin
+        run: |
+          go get github.com/franela/goblin
+      - if: ${{success()}}
+        name: Test using goblin
+        run: |
+           go test -v
+           go test -v | go2xunit > report.xml
+      - if: ${{failure()}}
+        name: Create issues if failed
+        uses: nashmaniac/create-issue-action@v1.1 
+        with:
+          title: Build Failed
+          token: ${{secrets.TOKEN_SECRET}}
+          assignees: ${{github.actor}}
+          labels: worflow-failed
+          body: Workflow failed for commit ${{github.sha}}
