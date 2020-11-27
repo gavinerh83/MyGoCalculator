@@ -1,4 +1,4 @@
-package goblin_test
+package calc
 
 import (
 	"testing"
@@ -11,17 +11,17 @@ func Test(t *testing.T) {
 	g.Describe("Numbers", func() {
 		// Passing Test
 		g.It("Should add two numbers ", func() {
-			g.Assert(1 + 1).Equal(2)
+			g.Assert(Add(3, 1)).Equal(4)
 		})
-		// Failing Test
-		g.It("Should match equal numbers", func() {
-			g.Assert(2).Equal(4)
+		g.It("Should do subtract operations", func() {
+			g.Assert(Subtract(20, 5)).Equal(15)
 		})
-		// Pending Test
-		g.It("Should substract two numbers")
+		g.It("Should Multiply two numbers", func() {
+			g.Assert(Multiply(6, 7)).Equal(42)
+		})
 		// Excluded Test
-		g.Xit("Should add two numbers ", func() {
-			g.Assert(3 + 1).Equal(4)
+		g.Xit("Should divide two numbers ", func() {
+			g.Assert(Divide(9, 3)).Equal(3.0)
 		})
 	})
 }
