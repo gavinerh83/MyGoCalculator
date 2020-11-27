@@ -20,7 +20,7 @@ func Test(t *testing.T) {
 			g.Assert(Multiply(6, 7)).Equal(42)
 		})
 		// Excluded Test
-		g.Xit("Should divide two numbers ", func() {
+		g.It("Should divide two numbers ", func() {
 			g.Assert(Divide(9, 3)).Equal(3.0)
 		})
 	})
