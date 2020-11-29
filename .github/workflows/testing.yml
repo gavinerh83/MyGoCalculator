@@ -1,4 +1,4 @@
-name: Setting up Go environment
+name: Setting up Go for testing
 on:
   push:
 jobs:
@@ -19,7 +19,7 @@ jobs:
         run: |
           go get github.com/tebeka/go2xunit
       - if: ${{success()}}
-        name: Go get goblin
+        name: Go get go check
         run: |
           go get gopkg.in/check.v1
       - if: ${{success()}}
