@@ -21,9 +21,9 @@ jobs:
       - if: ${{success()}}
         name: Go get goblin
         run: |
-          go get github.com/franela/goblin
+          go get gopkg.in/check.v1
       - if: ${{success()}}
-        name: Test using goblin
+        name: Test using go check
         run: |
            go test -v
            2>&1 go test -v | go2xunit -output report.xml

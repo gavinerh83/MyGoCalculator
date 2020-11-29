@@ -3,25 +3,29 @@ package calc
 import (
 	"testing"
 
-	. "github.com/franela/goblin"
+	. "gopkg.in/check.v1"
 )
 
 func Test(t *testing.T) {
-	g := Goblin(t)
-	g.Describe("Numbers", func() {
-		// Passing Test
-		g.It("Should add two numbers ", func() {
-			g.Assert(Add(3, 1)).Equal(4)
-		})
-		g.It("Should do subtract operations", func() {
-			g.Assert(Subtract(20, 5)).Equal(15)
-		})
-		g.It("Should Multiply two numbers", func() {
-			g.Assert(Multiply(6, 7)).Equal(42)
-		})
-		// Excluded Test
-		g.It("Should divide two numbers ", func() {
-			g.Assert(Divide(9, 3)).Equal(3.0)
-		})
-	})
+	TestingT(t)
+}
+
+type MySuite struct{}
+
+var _ = Suite(&MySuite{})
+
+func (s *MySuite) TestAdd(c *C) {
+	c.Assert(Add(1, 2), Equals, 3)
+}
+
+func (s *MySuite) TestSubtract(c *C) {
+	c.Assert(Subtract(4, 7), Equals, -3)
+}
+
+func (s *MySuite) TestMultiply(c *C) {
+	c.Assert(Multiply(5, 6), Equals, 30)
+}
+
+func (s *MySuite) TestDivide(c *C) {
+	c.Assert(Divide(10, 2), Equals, 5.0)
 }
